@@ -1,80 +1,161 @@
-# Welcome to GitHub
+# Reposi3
+A Cydia repository template. This template contains sample on how you can easily make depiction pages without replicating your html pages. The pages are styled using [Bootsrap](http://getbootstrap.com/) which is really easy to use. You can see how it looks like by visiting [this sample repo](https://supermamon.github.io/Reposi3/) on your desktop or mobile phone.
 
-Welcome to GitHub—where millions of developers work together on software. Ready to get started? Let’s learn how this all works by building and publishing your first GitHub Pages website!
+Most data for this repo is stored on XML files and are loaded on the depiction page dynamically. See the guide below on how to set it up. Note that this guide doesn't cover creating .deb files but will briefly cover assiging depictions.
 
-## Repositories
+## How to use this template
 
-Right now, we’re in your first GitHub **repository**. A repository is like a folder or storage space for your project. Your project's repository contains all its files such as code, documentation, images, and more. It also tracks every change that you—or your collaborators—make to each file, so you can always go back to previous versions of your project if you make any mistakes.
+### 1. Download
 
-This repository contains three important files: The HTML code for your first website on GitHub, the CSS stylesheet that decorates your website with colors and fonts, and the **README** file. It also contains an image folder, with one image file.
+If you are *not* hosting your repo on [Github Pages](https://pages.github.com/), you can download the zip file [here](https://github.com/supermamon/Reposi3/archive/master.zip) and extract to a subfolder on your website.
 
-## Describe your project
+There are 2 options for those using [Github Pages](https://pages.github.com/).
 
-You are currently viewing your project's **README** file. **_README_** files are like cover pages or elevator pitches for your project. They are written in plain text or [Markdown language](https://guides.github.com/features/mastering-markdown/), and usually include a paragraph describing the project, directions on how to use it, who authored it, and more.
+A. If you want to use your root `username.github.io` as your repo, fork this repo and rename it to `username.github.io`. So when adding it in Cydia, use `https://username.github.io`.
 
-[Learn more about READMEs](https://help.github.com/en/articles/about-readmes)
+B. If you want to use a subfolder for your existing `username.github.io` as your repo (example `username.github.io/repo`), fork this repo and rename it to `repo`. So when adding it in Cydia, use `https://username.github.io/repo`.
 
-## Your first website
+You can change `repo` to anything you want, like `cydia` for example. So your repo url would be `https://username.github.io/cydia`.
 
-**GitHub Pages** is a free and easy way to create a website using the code that lives in your GitHub repositories. You can use GitHub Pages to build a portfolio of your work, create a personal website, or share a fun project that you coded with the world. GitHub Pages is automatically enabled in this repository, but when you create new repositories in the future, you'll need to enable GitHub Pages manually to launch your site.
 
-[Learn more about GitHub Pages](https://pages.github.com/)
+#### 2. Personalize
 
-## Publish your site
+**Release File**
 
-Your first GitHub Pages website is automatically published at: `https://your-username.github.io/`, where "your-username," is your personal username on GitHub. The HTML file—called `index.html`—is rendered as the home page and you'll be making changes to this file in the next step.
+Edit `Release` file. Modify the items pointed by `<--`
 
-Congratulations! You just launched your first GitHub Pages website. It's now live to share with the entire world.
+    Origin: Reposi3  <--
+    Label: Reposi3   <--
+    Suite: stable
+    Version: 1.0
+    Codename: ios
+    Architectures: iphoneos-arm
+    Components: main
+    Description: Reposi3 - a cydia repo template  <--
 
-## Making your first edit
+**Branding**
 
-When you make any change to any file in your project, you’re making a **commit**. If you fix a typo, update a filename, or edit your code, you can add it to GitHub as a commit. Your commits represent your project’s entire history—and they’re all saved in your project’s repository.
+Open `index.html` and look at lines 18 and 19.
+Change line 18 into your own **brand** and line 19 to have your own URL.
+Line2 27-44 contains the list of featured packages.
+You can edit those too or remove them totally.
 
-With each commit, you have the opportunity to write a **commit message**, a short, meaningful comment describing the change you’re making to a file. So you always know exactly what changed, no matter when you return to a commit.
+Replace CydiaIcon.png.
 
-## Practice: Customize your first GitHub website by writing HTML code
 
-Want to edit the site you just published? Let’s practice commits by introducing yourself in your `index.html` file. Don’t worry about getting it right the first time—you can always build on your introduction later.
+**Page Footers**
 
-Let’s start with this template:
+This data are the links that appear at the bottom of every depication. The data is stored in `repo.xml` at the root folder of your repo.
 
+```xml
+<repo>
+    <footerlinks>
+        <link>
+            <name>Follow me on Twitter</name>
+            <url>https://twitter.com/reposi3</url>
+            <iconclass>glyphicon glyphicon-user</iconclass>
+        </link>
+        <link>
+            <name>I want this depiction template</name>
+            <url>https://github.com/supermamon/Reposi3</url>
+            <iconclass>glyphicon glyphicon-thumbs-up</iconclass>
+        </link>
+    </footerlinks>
+</repo>
 ```
-<p>Hello World! I’m [username]. This is my website!</p>
+
+
+#### 3. Your repo is _almost_ ready.
+At this point your repo is basically ready to be added into Cydia.
+You can also visit your repo's homepage by going to `https://username.github.io/repo/`.
+It will come with 2 sample packages, Old Package and New Package.
+Each of the packages have a link on this page pointing to their depictions.
+Next guide will show you how to assign and customize your depiction pages.
+
+## Adding packages first package to your repo
+
+#### 1. Adding a simple depiction page
+
+Go to the depictions folder and duplicate the folder `com.supermamon.oldpackage`.
+Rename the duplicate with the same name as your package name.
+There are 2 files inside the folder - `info.xml` and `changelog.xml`.
+Update the 2 files with information regading your package.
+The tags are pretty much self-explanatory.
+Contact [@reposi3](https://twitter.com/reposi3) or [@supermamon](https://twitter.com/supermamon) for questions.
+
+`info.xml`.
+```xml
+<package>
+    <id>com.supermamon.oldpackage</id>
+    <name>Old Package</name>
+    <version>1.0.0-1</version>
+    <compatibility>
+        <firmware>
+            <miniOS>5.0</miniOS>
+            <maxiOS>7.0</maxiOS>
+            <otherVersions>unsupported</otherVersions>
+            <!--
+            for otherVersions, you can put either unsupported or unconfirmed
+            -->
+        </firmware>
+    </compatibility>
+    <dependencies></dependencies>
+    <descriptionlist>
+        <description>This is an old package. Requires iOS 7 and below..</description>
+    </descriptionlist>
+    <screenshots></screenshots>
+    <changelog>
+        <change>Initial release</change>
+    </changelog>
+    <links></links>
+</package>
 ```
 
-To add your introduction, copy our template and click the edit pencil icon at the top right hand corner of the `index.html` file.
-
-<img width="997" alt="edit-this-file" src="https://user-images.githubusercontent.com/18093541/63131820-0794d880-bf8d-11e9-8b3d-c096355e9389.png">
-
-
-Delete this placeholder line:
-
+`changelog.xml`.
+```xml
+<changelog>
+    <changes>
+        <version>1.0.0-1</version>
+        <change>Initial release</change>
+    </changes>
+</changelog>
 ```
-<p>Welcome to your first GitHub Pages website!</p>
+
+
+#### 2. Link the depiction page your tweak's `control` file
+
+You can add the depictions url at the end of your package's `control` file before compiling it.
+The depiction line should look like this:
+
+```text
+Depiction: https://username.github.io/repo/depictions/?p=[idhere]
 ```
 
-Then, paste the template to line 15 and fill in the blanks.
+Replace `[idhere]` with your actual package name.
 
-<img width="1032" alt="edit-githuboctocat-index" src="https://user-images.githubusercontent.com/18093541/63132339-c3a2d300-bf8e-11e9-8222-59c2702f6c42.png">
+```text
+Depiction: https://username.github.io/repo/depictions/?p=com.supermamon.oldpackage
+```
 
+#### 3. Rebuilding the `Packages` file
 
-When you’re done, scroll down to the `Commit changes` section near the bottom of the edit page. Add a short message explaining your change, like "Add my introduction", then click `Commit changes`.
+With your updated `control` file, build your tweak.
+Store the resulting `.deb.` file into the `/debs/` folder of your repo.
+Build your `Packages` file and compress with `bzip2`.
 
+```sh
+user:~/ $ cd repo
+user:~/repo $ dpkg-scanpackages -m ./debs > Packages
+user:~/repo $ bzip2 Packages
+```
 
-<img width="1030" alt="add-my-username" src="https://user-images.githubusercontent.com/18093541/63131801-efbd5480-bf8c-11e9-9806-89273f027d16.png">
+_Windows users, see [dpkg-scanpackages-py](https://github.com/supermamon/dpkg-scanpackages-py) or [scanpkg](https://github.com/mstg/scanpkg)._
 
-Once you click `Commit changes`, your changes will automatically be published on your GitHub Pages website. Refresh the page to see your new changes live in action.
+#### 5. Cydia at last!
 
-:tada: You just made your first commit! :tada:
+If you haven't done yet, go ahead and add your repo to Cydia.
+You should now be able to install your tweak into your own repo.
 
-## Extra Credit: Keep on building!
+### Cleanup
 
-Change the placeholder Octocat gif on your GitHub Pages website by [creating your own personal Octocat emoji](https://myoctocat.com/build-your-octocat/) or [choose a different Octocat gif from our logo library here](https://octodex.github.com/). Add that image to line 12 of your `index.html` file, in place of the `<img src=` link.
-
-Want to add even more code and fun styles to your GitHub Pages website? [Follow these instructions](https://github.com/github/personal-website) to build a fully-fledged static website.
-
-![octocat](./images/create-octocat.png)
-
-## Everything you need to know about GitHub
-
-Getting started is the hardest part. If there’s anything you’d like to know as you get started with GitHub, try searching [GitHub Help](https://help.github.com). Our documentation has tutorials on everything from changing your repository settings to configuring GitHub from your command line.
+Just a cleanup step, remove the debs that came with this template and re-run the commands on step 3. You can keep the sample depictions for reference by they're not needed for your repo.
